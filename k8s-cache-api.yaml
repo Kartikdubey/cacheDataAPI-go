@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cache-api
+spec:
+  containers:
+    - name: cache-api
+      image: <docker_hub_id>/image_name:tag
+	  imagePullPolicy: Always
+    volumeMounts:
+      - name: chache-volume
+        mountPath: /usr/local/local.txt
+    resources:
+	    limits:
+		  cpu: 120m
+		  memory: 500Mi
+		requests:
+		  cpu: 120m
+		  memory: 500Mi
+  volumes:
+    - name: chache-volume
+      configMap:
+        name: cache-config
+        items:
+          - key: chache
+  
